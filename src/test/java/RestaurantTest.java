@@ -4,6 +4,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 
@@ -73,5 +77,16 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
+
+    @Test
+    public void when_getTotalAmount_called_totalAmount_should_be_returned(){
+        //Create a mock list of selected Menu Items
+        List<String> selectedItems = Arrays.asList("Sweet corn soup","Vegetable lasagne");
+        //Find Total Amount by calling the method. Method is not implemented. Just returns 0.
+        int totalAmount = restaurant.getTotalAmount(selectedItems);
+        //Assert
+        assertNotEquals(0, totalAmount);
+    }
+
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
