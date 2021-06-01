@@ -8,7 +8,7 @@ public class Restaurant {
     private String location;
     public LocalTime openingTime;
     public LocalTime closingTime;
-    private List<Item> menu = new ArrayList<Item>();
+    private List<Item> menu = new ArrayList<>();
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -18,10 +18,7 @@ public class Restaurant {
     }
 
     public boolean isRestaurantOpen() {
-        if(getCurrentTime().isBefore(closingTime) && getCurrentTime().isAfter(openingTime))
-            return true;
-        else
-            return false;
+        return getCurrentTime().isBefore(closingTime) && getCurrentTime().isAfter(openingTime);
     }
 
     public LocalTime getCurrentTime(){ return  LocalTime.now(); }
@@ -44,20 +41,18 @@ public class Restaurant {
     }
     
     public void removeFromMenu(String itemName) throws itemNotFoundException {
-
         Item itemToBeRemoved = findItemByName(itemName);
         if (itemToBeRemoved == null)
             throw new itemNotFoundException(itemName);
-
         menu.remove(itemToBeRemoved);
     }
-    public void displayDetails(){
+
+   public void displayDetails(){
         System.out.println("Restaurant:"+ name + "\n"
                 +"Location:"+ location + "\n"
                 +"Opening time:"+ openingTime +"\n"
                 +"Closing time:"+ closingTime +"\n"
                 +"Menu:"+"\n"+getMenu());
-
     }
 
     public String getName() {
@@ -65,6 +60,17 @@ public class Restaurant {
     }
 
     public int getTotalAmount(List<String> selectedItems){
-        return 0;
+        if (selectedItems.size()==0){
+            return 0;
+        }
+        else {
+            int total = 0;
+            Item temp;
+            for (String s : selectedItems) {
+                temp = findItemByName(s);
+                total = total + temp.getPrice();
+            }
+            return total;
+        }
     }
 }
