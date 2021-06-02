@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 
@@ -85,7 +87,8 @@ class RestaurantTest {
         //Act
         int totalAmount = restaurant.getTotalAmount(selectedItems);
         //Assert
-        assertNotEquals(-100, totalAmount);
+        //Changed the assert to actually check if the value is not negative
+        assertThat(totalAmount, greaterThan(0));
     }
 
     @Test
